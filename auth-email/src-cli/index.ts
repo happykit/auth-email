@@ -3,6 +3,7 @@ import open from "open"
 import createInit from "./init"
 import files from "./files"
 import db from "./db"
+import createRandomSecret from "./random-secret"
 
 program.name("auth").action(() => {
   console.log(program.helpInformation())
@@ -10,23 +11,33 @@ program.name("auth").action(() => {
 
 program.usage("[command]")
 
-// yarn auth init
+// yarn auth-email init
 createInit(program as Command)
+
+// yarn auth-email random-secret
+createRandomSecret(program as Command)
 
 program
   .command("docs")
   .description(`Open the documentation`)
   .action(() => {
-    open("https://github.com/happykit/auth/tree/master/package")
+    open("https://docs.happykit.dev/")
   })
 
-// yarn auth files init
-// yarn auth files clean
-// yarn auth files eject <path>
+program
+  .command("repo")
+  .description(`Open the repository`)
+  .action(() => {
+    open("https://github.com/happykit/auth-email")
+  })
+
+// yarn auth-email files init
+// yarn auth-email files clean
+// yarn auth-email files eject <path>
 program.addCommand(files)
 
-// yarn auth db init
-// yarn auth db validate
+// yarn auth-email db init
+// yarn auth-email db validate
 program.addCommand(db)
 
 program.parse(process.argv)

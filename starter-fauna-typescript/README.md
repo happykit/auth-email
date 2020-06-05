@@ -1,8 +1,46 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) using the [starter-fauna-typescript](https://github.com/happykit/auth-email/tree/master/starter-fauna-typescript) setup.
+
+## Setup
+
+### Create a new FaunaDB
+
+Open [dashboard.fauna.com](https://dashboard.fauna.com/) to create a free FaunaDB instance. No credit card requried.
+
+Then use the Fauna web app to create a new "Server Key" (under "Security") and copy it.
+
+Finally, configure your FaunaDB by running the following command:
+
+```
+yarn auth-email db init
+```
+
+Copy your FaunaDB secret in when prompted.
+
+### Environment variables
+
+Create a `.env.local` file. Next.js will load the environment variables automatically.
+
+Fill it with this content:
+
+```bash
+# Your server key from fauna.com
+# Create a new database,
+# then go to "Security > New Key"
+# and create a new server key.
+FAUNA_SERVER_KEY="<your faunadb server key>"
+# A random secret to sign your tokens.
+# We automatically created a random secret when creating this file.
+# You can keep it, or you can replace it with your own.
+# Note that existing users will be signed out whenever you change the secret.
+#
+# You can use "yarn auth-email random-secret" to create one.
+# Alternatively, you can just provide your own long random string.
+HAPPYAUTH_TOKEN_SECRET="<a random secret used to sign your tokens>"
+```
 
 ## Getting Started
 
-First, run the development server:
+Now you can run the development server:
 
 ```bash
 npm run dev
@@ -14,17 +52,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-## Learn More
+## Resources
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [HappyKit site](https://happykit.dev/)
+- [Full documentation](https://docs.happykit.dev/)
+- [Repo](https://github.com/happykit/auth-email/)
