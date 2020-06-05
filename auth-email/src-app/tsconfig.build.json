@@ -1,0 +1,6 @@
+{
+  // This config file (tsconfig.build.json) is used for the build process.
+  // The only difference is that we exclude the test files.
+  "extends": "./tsconfig.json",
+  "exclude": ["node_modules", "**/*.spec.ts", "**/*.spec.tsx"]
+}

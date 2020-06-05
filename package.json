@@ -1,0 +1,39 @@
+{
+  "name": "happyauth-email",
+  "private": true,
+  "license": "MIT",
+  "workspaces": [
+    "pristine",
+    "pristine-typescript",
+    "starter-fauna",
+    "starter-fauna-typescript",
+    "auth-email"
+  ],
+  "scripts": {
+    "test": "jest",
+    "build": "yarn workspace @happykit/auth-email build",
+    "pub": "yarn workspace @happykit/auth-email publish --access=public"
+  },
+  "dependencies": {
+    "wsrun": "5.2.0"
+  },
+  "devDependencies": {
+    "faunadb": "2.14.1",
+    "next": "9.4.4",
+    "prettier": "2.0.5",
+    "react": "16.13.1",
+    "react-dom": "16.13.1"
+  },
+  "prettier": {
+    "semi": false,
+    "tabWidth": 2,
+    "singleQuote": false,
+    "trailingComma": "all"
+  },
+  "jest": {
+    "projects": [
+      "<rootDir>/auth-email/src-app/jest.jsdom.config.js",
+      "<rootDir>/auth-email/src-app/jest.node.config.js"
+    ]
+  }
+}
