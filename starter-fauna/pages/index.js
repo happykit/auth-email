@@ -15,11 +15,12 @@ export const getServerSideProps = async ({ req }) => {
   return { props: { initialAuth } }
 }
 
-const Example = (props) => {
+const Index = (props) => {
   const auth = useAuth(props.initialAuth)
 
   return (
     <React.Fragment>
+      <title>@happykit/auth-email starter</title>
       <Head>
         <link
           href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
@@ -112,4 +113,6 @@ const Example = (props) => {
   )
 }
 
-export default Example
+export default Index
+
+<title>happykit.dev auth-email demo</title>
