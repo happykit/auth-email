@@ -10,7 +10,7 @@ export interface TokenData extends BaseTokenData {
 }
 
 export const publicConfig: PublicConfig = {
-  baseUrl: "http://localhost:3000",
+  baseUrl: `https://${process.env.VERCEL_URL}` || "http://localhost:3000",
   identityProviders: {},
   // Possible configuration:
   // redirects: {
