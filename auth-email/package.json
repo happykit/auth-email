@@ -12,7 +12,8 @@
   "scripts": {
     "test": "jest",
     "dev": "webpack --config webpack.config.js --watch",
-    "build": "NODE_ENV=production webpack --config webpack.config.js"
+    "build": "NODE_ENV=production webpack --config webpack.config.js",
+    "pub": "yarn publish --access=public"
   },
   "files": [
     "api",
