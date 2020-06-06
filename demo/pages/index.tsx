@@ -10,6 +10,7 @@ import Head from "next/head"
 import Link from "next/link"
 import { useAuth } from "happyauth"
 import { getServerSideAuth, AuthState } from "happyauth/server"
+import classNames from "classnames"
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const initialAuth = getServerSideAuth(req)
@@ -19,16 +20,35 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
 const Index = (props: { initialAuth: AuthState }) => {
   const auth = useAuth(props.initialAuth)
 
+  const [visible, setVisible] = React.useState(false)
+
+  // Try to avoid flash of unstyled content.
+  // Once the <link /> supports an onLoad, we can use that to await
+  // the load (with a timeout) before showing the page contents.
+  React.useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setVisible(true)
+    }, 100)
+    return () => {
+      clearTimeout(timeoutId)
+    }
+  }, [setVisible])
+
   return (
     <React.Fragment>
-      <title>@happykit/auth-email starter</title>
       <Head>
+        <title>@happykit/auth-email demo</title>
         <link
           href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
           rel="stylesheet"
         />
       </Head>
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div
+        className={classNames(
+          visible ? "visible" : "invisible",
+          "min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8",
+        )}
+      >
         <div className="max-w-md w-full">
           <div>
             <h2 className="text-center text-3xl leading-9 font-extrabold text-gray-900">
@@ -62,6 +82,15 @@ const Index = (props: { initialAuth: AuthState }) => {
                 </div>
               </div>
               <div className="mt-6 flex justify-around items-center">
+                <div>
+                  <Link href={`/change-password`}>
+                    <a>
+                      <button className="relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-pink-600 hover:bg-pink-500 focus:outline-none focus:border-pink-700 focus:shadow-outline-pink active:bg-pink-700 transition duration-150 ease-in-out">
+                        Change password
+                      </button>
+                    </a>
+                  </Link>
+                </div>
                 <div>
                   <button
                     className="relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-pink-600 hover:bg-pink-500 focus:outline-none focus:border-pink-700 focus:shadow-outline-pink active:bg-pink-700 transition duration-150 ease-in-out"
