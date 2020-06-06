@@ -52,6 +52,10 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
+## Email
+
+Out of the box, HappyAuth is configured to log all mails to the server console instead of sending them. You can provide your the triggers in `pages/api/auth/[...params].js` with your own functions to start sending real mails.
+
 ## Resources
 
 - [HappyKit site](https://happykit.dev/)
