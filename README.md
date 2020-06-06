@@ -5,7 +5,7 @@
 <div align="right">
   <a href="https://github.com/happykit/auth/tree/master/package/docs#nav">Documentation</a>
   <span>&nbsp;•&nbsp;</span>
-  <a href="https://github.com/happykit/auth/blob/master/package/docs/demos.md#nav">Demo</a>
+  <a href="https://auth-email-demo.now.sh/">Demo</a>
   <span>&nbsp;•&nbsp;</span>
   <a href="https://www.happykit.dev/auth" target="_blank">Website</a>
   <span>&nbsp;•&nbsp;</span>
