@@ -3,6 +3,7 @@
   "private": true,
   "license": "MIT",
   "workspaces": [
+    "demo",
     "pristine",
     "pristine-typescript",
     "starter-fauna",

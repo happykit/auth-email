@@ -29,6 +29,8 @@ import jwt from "jsonwebtoken"
 
 export { createFaunaEmailDriver } from "../drivers/fauna"
 export {
+  SendForgotPasswordMail,
+  SendConfirmAccountMail,
   sendConfirmAccountMailToConsole,
   sendForgotPasswordMailToConsole,
   sendConfirmAccountMailUsingSendMail,
