@@ -7,13 +7,11 @@ import {
   createSignup,
   sendConfirmAccountMailToConsole,
   SendConfirmAccountMail,
-  sendConfirmAccountMailUsingSendMail,
 } from "./signup"
 import { createTokenContent } from "./tokencontent"
 import {
   createForgotPassword,
   sendForgotPasswordMailToConsole,
-  sendForgotPasswordMailUsingSendMail,
   SendForgotPasswordMail,
 } from "./forgot-password"
 import { createResetPassword } from "./reset-password"
@@ -33,8 +31,6 @@ export {
   SendConfirmAccountMail,
   sendConfirmAccountMailToConsole,
   sendForgotPasswordMailToConsole,
-  sendConfirmAccountMailUsingSendMail,
-  sendForgotPasswordMailUsingSendMail,
 }
 
 const extract = (x: string | string[]) => (Array.isArray(x) ? x[0] : x)

@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next"
 import { ok, unexpectedError, AuthRouteHandlerOptions } from "."
 import jwt from "jsonwebtoken"
-import createSendMail from "sendmail"
 
 export type SendConfirmAccountMail = (
   email: string,
@@ -34,49 +33,6 @@ export const sendConfirmAccountMailToConsole: SendConfirmAccountMail = async (
       "",
     ].join("\n"),
   )
-}
-
-let sendMail: ReturnType<typeof createSendMail> | undefined
-// This is kept rudimentary on purpose.
-// Pass in your own send*Mail functions if you need more features.
-export const sendConfirmAccountMailUsingSendMail: SendConfirmAccountMail = async (
-  email,
-  link,
-) => {
-  return new Promise((resolve, reject) => {
-    if (!sendMail) sendMail = createSendMail({})
-    sendMail(
-      {
-        from:
-          process.env.SENDMAIL_SENDER_EMAIL_ADDRESS ||
-          "no-reply@yourdomain.com",
-        to: email,
-        subject: "Reset your password",
-        html: [
-          `Welcome,`,
-          ``,
-          `your account has been created.`,
-          ``,
-          `Click the link below to activate it:`,
-          `<a href="${link}">${link}</a>`,
-          ``,
-          `PS: If you did not sign up, you can simply ignore this email.`,
-          ``,
-          `Cheers`,
-        ].join("\n"),
-      },
-      (error) => {
-        console.log("callback", error)
-
-        if (error) {
-          console.log(error)
-          reject(error)
-        } else {
-          resolve()
-        }
-      },
-    )
-  })
 }
 
 const delay = (ms = 200) => new Promise((resolve) => setTimeout(resolve, ms))
