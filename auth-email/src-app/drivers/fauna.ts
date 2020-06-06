@@ -53,7 +53,7 @@ export function createFaunaEmailDriver(faunaClient: faunadb.Client): Driver {
               //
               // See "ts" here:
               // https://docs.fauna.com/fauna/current/api/fql/functions/get
-              accountStatus: AccountStatus.confirmed,
+              accountStatus: AccountStatus.unconfirmed,
             },
           }),
         )
