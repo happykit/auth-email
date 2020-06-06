@@ -11,13 +11,8 @@ export interface TokenData extends BaseTokenData {
 
 export const publicConfig: PublicConfig = {
   baseUrl: (() => {
-    console.log(
-      "VERCEL_GITHUB_COMMIT_REF",
-      process.env.VERCEL_GITHUB_COMMIT_REF,
-    )
-
     if (process.env.VERCEL_GITHUB_COMMIT_REF === "master")
-      return `https://${process.env.VERCEL_URL}`
+      return process.env.PRODUCTION_BASE_URL
     if (process.env.NODE_ENV === "production")
       return `https://${process.env.VERCEL_URL}`
     return "http://localhost:3000"
