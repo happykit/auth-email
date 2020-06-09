@@ -189,6 +189,9 @@ This file defines a [Catch all API route](https://nextjs.org/docs/api-routes/dyn
 
 This file, `happyauth/index.js` and `happyauth/server.js` are the three places where you can configure HappyAuth.
 
+<details>
+<summary>Less important files</summary>
+
 #### `pages/_app.js`
 
 HappyAuth needs an `AuthProvider` component which wraps your application. This component will ensure that you're only using one `useAuth` hook per page.
@@ -204,6 +207,8 @@ The configuration will map the following absolute imports to the files at the ro
 - `happyauth` to `/happyauth/index.js`
 - `happyauth/server` to `/happyauth/server.js`
 - `fauna-client` to `/fauna-client.js`
+
+</details>
 
 ### Running locally
 
