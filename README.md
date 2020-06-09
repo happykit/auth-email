@@ -3,11 +3,11 @@
 </a>
 
 <div align="right">
-  <a href="https://github.com/happykit/auth/tree/master/package/docs#nav">Documentation</a>
+  <a href="https://docs.happykit.dev/">Documentation</a>
   <span>&nbsp;•&nbsp;</span>
   <a href="https://auth-email-demo.now.sh/">Demo</a>
   <span>&nbsp;•&nbsp;</span>
-  <a href="https://www.happykit.dev/auth" target="_blank">Website</a>
+  <a href="https://www.happykit.dev/" target="_blank">Website</a>
   <span>&nbsp;•&nbsp;</span>
   <a href="https://www.twitter.com/dferber90" target="_blank">Twitter</a>
 </div>
