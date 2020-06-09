@@ -80,6 +80,8 @@ export default function Home(props) {
 
 We are now prechecking the authenticated user on the server and passing that information down to the client. This allows us to get rid off the loading state. And more importantly, this gives us full access to the currently authenticated user inside `getServerSideProps`. We can prefetch any data we like based on that user and return it to as a prop. No more loading spinners!
 
+> This package itself is mostly ready, however the documentation and the HappyKit website are still being built.
+
 ## Demo
 
 _gif coming soon_
