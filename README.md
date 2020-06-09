@@ -84,17 +84,41 @@ We are now prechecking the authenticated user on the server and passing that inf
 
 _gif coming soon_
 
-## Setup
+## Quickstart
 
-> HappyAuth works with other databases too. This Quickstart focuses on FaunaDB.
+> This Quickstart focuses on FaunaDB, but HappyAuth works with other databases as well. 
+
+We provide an example application which you can use as the foundation of your project. You can use `create-next-app` to start a new project:
+
+```
+npx create-next-app --example https://github.com/happykit/auth-email/tree/master/starter-fauna my-app
+or
+yarn create next-app --example https://github.com/happykit/auth-email/tree/master/starter-fauna my-app
+```
 
 <details>
+<summary>TypeScript starter</summary>
 
-<summary>Creating a FaunaDB instance (3 minutes)</summary>
+In case you're using TypeScript, you can use this starter instead:
+
+```
+npx create-next-app --example https://github.com/happykit/auth-email/tree/master/starter-fauna-typescript my-app
+or
+yarn create next-app --example https://github.com/happykit/auth-email/tree/master/starter-fauna-typescript my-app
+```
+
+</details>
+
+> Check out our [documentation](https://docs.happykit.dev/) in case you want to add HappyAuth to an existing project. We provide a convenient CLI which adds the required files to your project in one step.
+> 
+> **Note:** The documentation site is still under construction. In the meantime, you can check out the README at this [commit](https://github.com/happykit/auth-email/blob/740a01395ab517c7e18fbed2751d6fbd5ff12d0c/README.md#setup) for the manual setup instructions.
+
 
 ### Create a FaunaDB instance
 
-We'll start by setting up a free FaunaDB instance on [fauna.com](https://fauna.com/). That database will be used to store our user accounts. You can use it to store your applications information too.
+Next, you'll need to create a free FaunaDB instance. It takes around 3 minutes. No credit card is required.
+
+The following steps will walk you through the setup of a free FaunaDB instance on [fauna.com](https://fauna.com/). That database will be used to store our user accounts. You can use it to store your applications information too.
 
 There's a generous free tier and it doesn't require a credit card. You can sign in with GitHub.
 
@@ -112,100 +136,20 @@ There's a generous free tier and it doesn't require a credit card. You can sign 
 
 That completes our database setup for now. We'll later use a script to create a User collection and an index.
 
-</details>
 
-<details>
-  <summary>TypeScript setup (optional)</summary>
-    
-    
-### TypeScript (optional)
+### The starter
 
-If you want to use TypeScript, you should set it up in your project before continuing. HappyAuth will detect that your project uses TypeScript and will emit TypeScript files instead of plain JavaScript files.
+The most important concept is that you'll usually not import from `@happykit/auth-email`. Instead, you'll import preconfigured functions from a local folder called `happyauth`. The project is configured so that you can just do `import x from "happyauth"` and it will resolve to the `happyauth` folder.
 
-```bash
-touch tsconfig.json
-yarn add --dev typescript @types/react @types/node
-```
-
-Then start your app once to make Next.js prefill tsconfig.json:
-
-```bash
-yarn dev
-```
-
-After it booted, you can stop the app and continue with the setup.
-
-We recommend setting these compiler options in `tsconfig.json`
-
-```json
-{
-  "compilerOptions": {
-    "baseUrl": ".",
-    "noImplicitAny": true,
-    "strictNullChecks": true
-  }
-}
-```
-
-Full instructions: https://nextjs.org/docs/basic-features/typescript
-
-</details>
-
-### Install packages
-
-```
-yarn add @happykit/auth-email faunadb
-```
-
-You'll notice that we're not actually installing a `happyauth` package even though we are importing from `happyauth` in the examples above. That's because `happyauth` is not an npm package. Instead, we are using a Next.js feature called [Absolute Imports](https://nextjs.org/docs/advanced-features/module-path-aliases) to alias `happyauth` to a folder you'll create in your project later on.
-
-### Run the scaffolding
-
-Run the following command to configure the database and init the files. Make sure you have the FaunaDB secret ready (see "Creating a FaunaDB instance (3 minutes)" above):
-
-```
-yarn auth-email init
-```
-
-This will create a "User" collection and an appropriate index. It will also set the required files in your a Next.js project.
-
-> We will auto-detect if your are using TypeScript. In that case we'll create TypeScript files instead. See "TypeScript (optional)" above for setup instructions.
-
-### Configure Absolute Imports
-
-To enable importing from the `happyauth` folder, you'll need to set up [Absolute Imports](https://nextjs.org/docs/advanced-features/module-path-aliases) (`import {} from "happyauth"`).
-
-#### With JavaScript
-
-If you're using JavaScript, the scaffolding will create that file for you. If you're using TypeScript, you'll need to add the `baseUrl` option to your `compilerOptions` in `tsconfig.json` like so:
-
-```json
-{
-  "compilerOptions": {
-    "baseUrl": "."
-  }
-}
-```
-
-#### With TypeScript
-
-If you're using JavaScript, you'll need a file called `jsconfig.json` at the root of your project with the following contents:
-
-```json
-{
-  "compilerOptions": {
-    "baseUrl": "."
-  }
-}
-```
-
-### What you get
-
-The following files will be created by the scaffolding.
+The following files are included in your Next.js HappyAuth starter.
 
 #### `.env.local`
 
 This file contains your secrets for local development.
+
+Paste in the `FAUNA_SERVER_KEY` which you created in the previous step.
+
+Make sure to replace the `HAPPYAUTH_TOKEN_SECRET` with a random value. You can execute `yarn auth-email random-secret` to create one.
 
 Contents:
 
@@ -214,7 +158,7 @@ FAUNA_SERVER_KEY="fnxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 HAPPYAUTH_TOKEN_SECRET="<random value>"
 ```
 
-> Make sure to provide these environment variables in your production application. It's recommended to create a separate FaunaDB database for production, with its own secret. You can execute `yarn auth-email db init` to configure your production database. You don't need to worry about this now if you're just playing around locally.
+> This file sets the environment variables for development. Make sure to provide these environment variables in your production application too. It's recommended to create a separate FaunaDB database for production, with its own secret. You can execute `yarn auth-email db init` to configure your production database. You don't need to worry about this now if you're just playing around locally.
 
 #### `happyauth/index.js`
 
@@ -243,13 +187,17 @@ These pages handle user authentication. They define the following routes:
 
 This file defines a [Catch all API route](https://nextjs.org/docs/api-routes/dynamic-api-routes#catch-all-api-routes) which handles all requests to `/api/auth/*`.
 
+This file, `happyauth/index.js` and `happyauth/server.js` are the three places where you can configure HappyAuth.
+
 #### `pages/_app.js`
 
 HappyAuth needs an `AuthProvider` component which wraps your application. This component will ensure that you're only using one `useAuth` hook per page.
 
-#### `jsconfg.json`
+#### `jsconfg.json` and `tsconfig.json`
 
-This file is only created for JavaScript projects as stated in [Configure Absolute Imports](#configure-absolute-imports). If you're using TypeScript, you'll need to modify `tsconfig.json` as stated [here](#configure-absolute-imports).
+These files enable importing from `happyauth` and treating it as if it was a regular package. This is done using [Absolute Imports](#configure-absolute-imports).
+
+The JavaScript starter uses `jsconfig.json`, while the TypeScript starter uses `tsconfig.json`.
 
 The configuration will map the following absolute imports to the files at the root:
 
@@ -265,11 +213,5 @@ You're now ready to run your app!
 yarn dev
 ```
 
-You can visit these pages locally to see HappyAuth in action:
+Then visit [localhost:3000](http://localhost:3000/) to see HappyAuth in action.
 
-- [localhost:3000/signup](http://localhost:3000/signup)
-- [localhost:3000/login](http://localhost:3000/login)
-- [localhost:3000/forgot-password](http://localhost:3000/forgot-password)
-- [localhost:3000/change-password](http://localhost:3000/change-password)
-
-> We also created a file called `pages/example.js` which is an example index page tying all these routes together. You can rename `pages/example.js` to `pages/index.js` to see it in action. Otherwise, you can delete `pages/example.js` as it's only there for demo purposes.
