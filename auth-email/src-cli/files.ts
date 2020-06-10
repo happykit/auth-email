@@ -37,8 +37,6 @@ async function getFiles(source: string, target: string) {
   }>((resolve, reject) => {
     klaw(source)
       .on("data", (item) => {
-        console.log(item.path, item.stats.isDirectory())
-
         // exclude folders
         if (item.stats.isDirectory()) return
 
