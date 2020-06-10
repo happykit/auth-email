@@ -26,7 +26,7 @@ const sendConfirmAccountMail: SendConfirmAccountMail = (email, link) => {
     const data = {
       from: process.env.SENDMAIL_SENDER_EMAIL_ADDRESS,
       to: email,
-      subject: "Reset your password",
+      subject: "Welcome to the HappyKit Demo",
       html: [
         `Welcome,`,
         ``,
