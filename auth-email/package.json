@@ -1,6 +1,6 @@
 {
   "name": "@happykit/auth-email",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.3",
   "main": "index.js",
   "types": "index.d.ts",
   "author": "Dominik Ferber <dominik.ferber+npm@gmail.com> (http://dferber.de/)",
