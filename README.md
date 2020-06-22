@@ -5,8 +5,6 @@
 <div align="right">
   <a href="https://auth-email-demo.now.sh/">Demo</a>
   <span>&nbsp;•&nbsp;</span>
-  <a href="https://www.happykit.dev/" target="_blank">Website</a>
-  <span>&nbsp;•&nbsp;</span>
   <a href="https://www.twitter.com/dferber90" target="_blank">Twitter</a>
 </div>
 
@@ -109,9 +107,9 @@ yarn create next-app --example https://github.com/happykit/auth-email/tree/maste
 
 </details>
 
-> Check out our [documentation](https://docs.happykit.dev/) in case you want to add HappyAuth to an existing project. We provide a convenient CLI which adds the required files to your project in one step.
+> ~Check out our [documentation](https://docs.happykit.dev/) in case you want to add HappyAuth to an existing project. We provide a convenient CLI which adds the required files to your project in one step.~
 > 
-> **Note:** The documentation site is still under construction. In the meantime, you can check out the README at this [commit](https://github.com/happykit/auth-email/blob/740a01395ab517c7e18fbed2751d6fbd5ff12d0c/README.md#setup) for the manual setup instructions.
+> **Note:** The documentation site is still under construction. In the meantime, you can check out the README at this [commit](https://github.com/happykit/auth-email/blob/740a01395ab517c7e18fbed2751d6fbd5ff12d0c/README.md#setup) for the manual setup instructions. You'll need to install `@happykit/auth-email@1.0.0-alpha.3`.
 
 
 ### Create a FaunaDB instance
