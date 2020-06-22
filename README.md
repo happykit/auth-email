@@ -84,7 +84,9 @@ _gif coming soon_
 
 ## Quickstart
 
-> This Quickstart focuses on FaunaDB, but HappyAuth works with other databases as well. 
+> This Quickstart focuses on FaunaDB, but HappyAuth works with other databases as well.
+
+> HappyAuth is currently in alpha. You can use it to play around, but there are a few more breaking changes planned before the first stable release.
 
 We provide an example application which you can use as the foundation of your project. You can use `create-next-app` to start a new project:
 
