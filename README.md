@@ -3,8 +3,6 @@
 </a>
 
 <div align="right">
-  <a href="https://docs.happykit.dev/">Documentation</a>
-  <span>&nbsp;•&nbsp;</span>
   <a href="https://auth-email-demo.now.sh/">Demo</a>
   <span>&nbsp;•&nbsp;</span>
   <a href="https://www.happykit.dev/" target="_blank">Website</a>
