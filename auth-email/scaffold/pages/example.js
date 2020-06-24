@@ -64,6 +64,15 @@ const Example = (props) => {
               </div>
               <div className="mt-6 flex justify-around items-center">
                 <div>
+                  <Link href={`/change-password`}>
+                    <a>
+                      <button className="relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-pink-600 hover:bg-pink-500 focus:outline-none focus:border-pink-700 focus:shadow-outline-pink active:bg-pink-700 transition duration-150 ease-in-out">
+                        Change password
+                      </button>
+                    </a>
+                  </Link>
+                </div>
+                <div>
                   <button
                     className="relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-pink-600 hover:bg-pink-500 focus:outline-none focus:border-pink-700 focus:shadow-outline-pink active:bg-pink-700 transition duration-150 ease-in-out"
                     type="button"
