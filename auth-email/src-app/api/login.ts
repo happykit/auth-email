@@ -52,7 +52,7 @@ export function createLogin(options: AuthRouteHandlerOptions) {
     }
 
     try {
-      const loginRes = await options.driver.attemptEmailPasswordLogin(
+      const loginRes = await options.serverConfig.driver.attemptEmailPasswordLogin(
         email,
         password,
       )
@@ -70,9 +70,9 @@ export function createLogin(options: AuthRouteHandlerOptions) {
         return
       }
 
-      const additionalTokenContent = options.triggers
+      const additionalTokenContent = options.serverConfig.triggers
         .fetchAdditionalTokenContent
-        ? await options.triggers.fetchAdditionalTokenContent({
+        ? await options.serverConfig.triggers.fetchAdditionalTokenContent({
             userId: loginRes.data.userId,
           })
         : {}

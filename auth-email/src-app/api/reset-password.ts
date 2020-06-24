@@ -65,11 +65,16 @@ export function createResetPassword(options: AuthRouteHandlerOptions) {
       }
 
       const userId = data.userId
-      await options.driver.updateEmailUserPassword(userId, password.trim())
+      await options.serverConfig.driver.updateEmailUserPassword(
+        userId,
+        password.trim(),
+      )
 
-      const additionalTokenContent = options.triggers
+      const additionalTokenContent = options.serverConfig.triggers
         .fetchAdditionalTokenContent
-        ? await options.triggers.fetchAdditionalTokenContent({ userId })
+        ? await options.serverConfig.triggers.fetchAdditionalTokenContent({
+            userId,
+          })
         : {}
 
       const serializedCookie = serializeAuthCookie(

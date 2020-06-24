@@ -35,7 +35,7 @@ export function createResendConfirmationEmail(
     }
 
     try {
-      const userId = await options.driver.getUserIdByEmail(
+      const userId = await options.serverConfig.driver.getUserIdByEmail(
         email.trim().toLowerCase(),
       )
 
@@ -55,7 +55,7 @@ export function createResendConfirmationEmail(
         },
       )
       const link = `${options.publicConfig.baseUrl}/confirm-account#token=${confirmJwt}`
-      await options.triggers.sendConfirmAccountMail(email, link)
+      await options.serverConfig.triggers.sendConfirmAccountMail(email, link)
       ok(res)
     } catch (error) {
       unexpectedError(res, error)

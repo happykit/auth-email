@@ -79,7 +79,7 @@ export function createSignup(options: AuthRouteHandlerOptions) {
       const trimmedPassword = password.trim()
 
       const creationDelay = delay()
-      const response = await options.driver.createEmailUser(
+      const response = await options.serverConfig.driver.createEmailUser(
         lowercasedEmail,
         trimmedPassword,
       )
@@ -102,7 +102,7 @@ export function createSignup(options: AuthRouteHandlerOptions) {
 
       // answer request immediately, then continue sending the mail
       ok(res)
-      await options.triggers.sendConfirmAccountMail(email, link)
+      await options.serverConfig.triggers.sendConfirmAccountMail(email, link)
     } catch (error) {
       unexpectedError(res)
     }

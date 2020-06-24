@@ -115,11 +115,11 @@ test(
   "when signup is successful",
   handler(
     () => {
-      options.driver.createEmailUser = jest.fn(async () => ({
+      options.serverConfig.driver.createEmailUser = jest.fn(async () => ({
         success: true as true,
         data: { userId: "1" },
       }))
-      options.triggers.sendConfirmAccountMail = jest.fn()
+      options.serverConfig.triggers.sendConfirmAccountMail = jest.fn()
       return createSignup(options)
     },
     async (url) => {
@@ -131,7 +131,9 @@ test(
       expect(response.status).toBe(200)
 
       const data = await response.json()
-      expect(options.triggers.sendConfirmAccountMail).toHaveBeenCalledWith(
+      expect(
+        options.serverConfig.triggers.sendConfirmAccountMail,
+      ).toHaveBeenCalledWith(
         "user@test.com",
         expect.stringMatching(
           new RegExp("^http://localhost:3000/confirm-account#token=ey"),
@@ -146,7 +148,7 @@ test(
   "when user exists already",
   handler(
     () => {
-      options.driver.createEmailUser = jest.fn(async () => {
+      options.serverConfig.driver.createEmailUser = jest.fn(async () => {
         const creationError: {
           success: false
           reason: "instance not unique"
@@ -156,7 +158,7 @@ test(
         }
         return creationError
       })
-      options.triggers.sendConfirmAccountMail = jest.fn()
+      options.serverConfig.triggers.sendConfirmAccountMail = jest.fn()
       return createSignup(options)
     },
     async (url) => {
@@ -168,7 +170,9 @@ test(
       expect(response.status).toBe(200)
 
       const data = await response.json()
-      expect(options.triggers.sendConfirmAccountMail).not.toHaveBeenCalled()
+      expect(
+        options.serverConfig.triggers.sendConfirmAccountMail,
+      ).not.toHaveBeenCalled()
       expect(data).toEqual({ data: { ok: true } })
     },
   ),
@@ -178,10 +182,10 @@ test(
   "when user creation fails",
   handler(
     () => {
-      options.driver.createEmailUser = jest.fn(async () => {
+      options.serverConfig.driver.createEmailUser = jest.fn(async () => {
         throw new Error("custom error")
       })
-      options.triggers.sendConfirmAccountMail = jest.fn()
+      options.serverConfig.triggers.sendConfirmAccountMail = jest.fn()
       return createSignup(options)
     },
     async (url) => {
@@ -193,7 +197,9 @@ test(
       expect(response.status).toBe(500)
 
       const data = await response.json()
-      expect(options.triggers.sendConfirmAccountMail).not.toHaveBeenCalled()
+      expect(
+        options.serverConfig.triggers.sendConfirmAccountMail,
+      ).not.toHaveBeenCalled()
       expect(data).toEqual({ error: { code: "unexpected error" } })
     },
   ),

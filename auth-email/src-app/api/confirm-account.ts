@@ -29,7 +29,9 @@ export function createConfirmAccount(options: AuthRouteHandlerOptions) {
         options.serverConfig.tokenSecret,
       ) as BaseTokenData
 
-      const confirmed = await options.driver!.confirmAccount(data.userId)
+      const confirmed = await options.serverConfig.driver.confirmAccount(
+        data.userId,
+      )
 
       if (!confirmed) {
         res
@@ -38,9 +40,11 @@ export function createConfirmAccount(options: AuthRouteHandlerOptions) {
         return
       } else {
         const userId = data.userId
-        const additionalTokenContent = options.triggers
+        const additionalTokenContent = options.serverConfig.triggers
           .fetchAdditionalTokenContent
-          ? await options.triggers.fetchAdditionalTokenContent({ userId })
+          ? await options.serverConfig.triggers.fetchAdditionalTokenContent({
+              userId,
+            })
           : {}
 
         const serializedCookie = serializeAuthCookie(

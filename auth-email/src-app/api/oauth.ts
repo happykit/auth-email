@@ -122,9 +122,9 @@ export function createOAuth(options: AuthRouteHandlerOptions) {
         //
         // Instead of forcing users to store it in the database, we pass it
         // to fetchAdditionalTokenContent, but only in case of OAuth (only here)
-        const additionalTokenContent = options.triggers
+        const additionalTokenContent = options.serverConfig.triggers
           .fetchAdditionalTokenContent
-          ? await options.triggers.fetchAdditionalTokenContent({
+          ? await options.serverConfig.triggers.fetchAdditionalTokenContent({
               userId,
               oauthToken: token,
             })

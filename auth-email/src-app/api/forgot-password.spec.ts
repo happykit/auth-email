@@ -76,8 +76,8 @@ test(
   "when the email does not match a user",
   handler(
     () => {
-      options.driver.getUserIdByEmail = jest.fn(async () => null)
-      options.triggers.sendForgotPasswordMail = jest.fn()
+      options.serverConfig.driver.getUserIdByEmail = jest.fn(async () => null)
+      options.serverConfig.triggers.sendForgotPasswordMail = jest.fn()
       return createForgotPassword(options)
     },
     async (url) => {
@@ -88,7 +88,9 @@ test(
       })
       expect(response.status).toBe(200)
       const body = await response.json()
-      expect(options.triggers.sendForgotPasswordMail).not.toHaveBeenCalled()
+      expect(
+        options.serverConfig.triggers.sendForgotPasswordMail,
+      ).not.toHaveBeenCalled()
       expect(body).toEqual({ data: { ok: true } })
     },
   ),
@@ -98,8 +100,10 @@ test(
   "when the email matches a user",
   handler(
     () => {
-      options.driver.getUserIdByEmail = jest.fn(async () => "fake-user-id")
-      options.triggers.sendForgotPasswordMail = jest.fn()
+      options.serverConfig.driver.getUserIdByEmail = jest.fn(
+        async () => "fake-user-id",
+      )
+      options.serverConfig.triggers.sendForgotPasswordMail = jest.fn()
       return createForgotPassword(options)
     },
     async (url) => {
@@ -110,7 +114,9 @@ test(
       })
       expect(response.status).toBe(200)
       const body = await response.json()
-      expect(options.triggers.sendForgotPasswordMail).toHaveBeenCalledWith(
+      expect(
+        options.serverConfig.triggers.sendForgotPasswordMail,
+      ).toHaveBeenCalledWith(
         "user@test.com",
         expect.stringMatching(
           new RegExp(
@@ -127,10 +133,10 @@ test(
   "when an unexpected error happens during getUserIdByEmail",
   handler(
     () => {
-      options.driver.getUserIdByEmail = jest.fn(async () => {
+      options.serverConfig.driver.getUserIdByEmail = jest.fn(async () => {
         throw new Error("hmm")
       })
-      options.triggers.sendForgotPasswordMail = jest.fn()
+      options.serverConfig.triggers.sendForgotPasswordMail = jest.fn()
       return createForgotPassword(options)
     },
     async (url) => {

@@ -110,13 +110,15 @@ test(
   "when account is not confirmed",
   handler(
     () => {
-      options.driver.attemptEmailPasswordLogin = jest.fn(async () => ({
-        success: true as true,
-        data: {
-          userId: "1",
-          accountStatus: AccountStatus.unconfirmed,
-        },
-      }))
+      options.serverConfig.driver.attemptEmailPasswordLogin = jest.fn(
+        async () => ({
+          success: true as true,
+          data: {
+            userId: "1",
+            accountStatus: AccountStatus.unconfirmed,
+          },
+        }),
+      )
       return createLogin(options)
     },
     async (url) => {
@@ -143,13 +145,15 @@ test(
   "when credentials are invalid",
   handler(
     () => {
-      options.driver.attemptEmailPasswordLogin = jest.fn(async () => {
-        const loginError = {
-          success: false as false,
-          reason: "authentication failed" as "authentication failed",
-        }
-        return loginError
-      })
+      options.serverConfig.driver.attemptEmailPasswordLogin = jest.fn(
+        async () => {
+          const loginError = {
+            success: false as false,
+            reason: "authentication failed" as "authentication failed",
+          }
+          return loginError
+        },
+      )
       return createLogin(options)
     },
     async (url) => {
@@ -170,13 +174,15 @@ test(
   "when login is successful",
   handler(
     () => {
-      options.driver.attemptEmailPasswordLogin = jest.fn(async () => ({
-        success: true as true,
-        data: {
-          userId: "1",
-          accountStatus: AccountStatus.confirmed,
-        },
-      }))
+      options.serverConfig.driver.attemptEmailPasswordLogin = jest.fn(
+        async () => ({
+          success: true as true,
+          data: {
+            userId: "1",
+            accountStatus: AccountStatus.confirmed,
+          },
+        }),
+      )
       return createLogin(options)
     },
     async (url) => {
@@ -193,11 +199,11 @@ test(
           `^${options.serverConfig.cookieName}=(\s+|\.)+; Path=/; HttpOnly; SameSite=Lax, syncAuthState=login; Path=/; SameSite=Lax$`,
         ),
       )
-      expect(options.triggers.fetchAdditionalTokenContent).toHaveBeenCalledWith(
-        {
-          userId: "1",
-        },
-      )
+      expect(
+        options.serverConfig.triggers.fetchAdditionalTokenContent,
+      ).toHaveBeenCalledWith({
+        userId: "1",
+      })
       expect(body).toEqual({ data: { ok: true } })
     },
   ),

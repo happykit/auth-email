@@ -7,7 +7,6 @@ import {
   ok,
   AuthRouteHandlerOptions,
 } from "."
-import { AuthApi } from ".."
 
 export function createChangePassword(options: AuthRouteHandlerOptions) {
   if (!options.serverConfig.tokenSecret)
@@ -63,7 +62,7 @@ export function createChangePassword(options: AuthRouteHandlerOptions) {
       }
 
       // update user by storing new password
-      await options.driver!.changeEmailUserPassword(
+      await options.serverConfig.driver.changeEmailUserPassword(
         auth.context.tokenData.userId,
         currentPassword.trim(),
         newPassword.trim(),

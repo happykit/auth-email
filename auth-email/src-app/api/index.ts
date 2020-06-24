@@ -61,6 +61,8 @@ export type ServerConfig = {
    * This is the server part of the configuration. You'll also need to configure `publicConfig.identityProviders`.
    */
   identityProviders: IdentityProviderConfig
+  triggers: Triggers
+  driver: Driver
 }
 
 export type GetServerSideAuth = ReturnType<typeof createGetServerSideAuth>
@@ -192,9 +194,7 @@ export type Driver = {
 export type AuthRouteHandlerOptions = {
   publicConfig: PublicConfig
   serverConfig: ServerConfig
-  triggers: Triggers
   getServerSideAuth: GetServerSideAuth
-  driver: Driver
 }
 
 export function createAuthRouteHandler<T extends BaseTokenData>(

@@ -23,27 +23,42 @@ export const serverConfig: ServerConfig = {
   identityProviders: {},
   secure: false,
   tokenSecret: "fake-token-secret",
+  triggers: {
+    sendConfirmAccountMail: jest.fn(),
+    sendForgotPasswordMail: jest.fn(),
+    fetchAdditionalTokenContent: jest.fn(),
+  },
+  driver: {
+    attemptEmailPasswordLogin: jest.fn(),
+    changeEmailUserPassword: jest.fn(),
+    confirmAccount: jest.fn(),
+    createEmailUser: jest.fn(),
+    getUserIdByEmail: jest.fn(),
+    updateEmailUserPassword: jest.fn(),
+  },
 }
 
 export function createAuthRouteHandlerOptions(
   defaultServerConfig: ServerConfig = serverConfig,
 ): AuthRouteHandlerOptions {
   return {
-    driver: {
-      attemptEmailPasswordLogin: jest.fn(),
-      changeEmailUserPassword: jest.fn(),
-      confirmAccount: jest.fn(),
-      createEmailUser: jest.fn(),
-      getUserIdByEmail: jest.fn(),
-      updateEmailUserPassword: jest.fn(),
-    },
     getServerSideAuth: createGetServerSideAuth(defaultServerConfig),
     publicConfig,
-    serverConfig: defaultServerConfig,
-    triggers: {
-      sendConfirmAccountMail: jest.fn(),
-      sendForgotPasswordMail: jest.fn(),
-      fetchAdditionalTokenContent: jest.fn(),
+    serverConfig: {
+      ...defaultServerConfig,
+      driver: {
+        attemptEmailPasswordLogin: jest.fn(),
+        changeEmailUserPassword: jest.fn(),
+        confirmAccount: jest.fn(),
+        createEmailUser: jest.fn(),
+        getUserIdByEmail: jest.fn(),
+        updateEmailUserPassword: jest.fn(),
+      },
+      triggers: {
+        sendConfirmAccountMail: jest.fn(),
+        sendForgotPasswordMail: jest.fn(),
+        fetchAdditionalTokenContent: jest.fn(),
+      },
     },
   }
 }

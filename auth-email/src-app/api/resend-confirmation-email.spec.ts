@@ -69,7 +69,7 @@ test(
   "when no user exists for that email",
   handler(
     () => {
-      options.driver.getUserIdByEmail = jest.fn(async () => null)
+      options.serverConfig.driver.getUserIdByEmail = jest.fn(async () => null)
       return createResendConfirmationEmail(options)
     },
     async (url) => {
@@ -90,7 +90,7 @@ test(
   "when a user exists for that email",
   handler(
     () => {
-      options.driver.getUserIdByEmail = jest.fn(async () => "1")
+      options.serverConfig.driver.getUserIdByEmail = jest.fn(async () => "1")
       return createResendConfirmationEmail(options)
     },
     async (url) => {

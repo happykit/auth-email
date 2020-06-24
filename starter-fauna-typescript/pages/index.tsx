@@ -40,12 +40,12 @@ const Index = (props: { initialAuth: AuthState }) => {
           </div>
           <div className="mt-8 text-sm text-gray-700">
             <p className="mt-2">
-              This application was created HappyAuth. You would replace this
-              index page with your own application.
+              This application was created with HappyAuth. You would replace
+              this index page with your own application.
             </p>
             <p className="mt-2">
-              All the authentication pages with{" "}
-              <span className="text-indigo-600">purple</span> buttons are set up
+              All the authentication pages with
+              <span className="text-indigo-600">purple buttons</span> are set up
               for you already. You can keep using them, or replace them with
               your own!
             </p>

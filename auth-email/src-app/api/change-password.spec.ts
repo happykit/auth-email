@@ -41,7 +41,7 @@ test(
   "when authenticated and sending correct passwords",
   handler(
     () => {
-      options.driver.changeEmailUserPassword = jest.fn(
+      options.serverConfig.driver.changeEmailUserPassword = jest.fn(
         (userId: string, currentPassword: string, newPassword: string) =>
           Promise.resolve(),
       )
@@ -59,11 +59,9 @@ test(
       })
       expect(response.status).toBe(200)
 
-      expect(options.driver.changeEmailUserPassword).toHaveBeenCalledWith(
-        "1",
-        "hunter2",
-        "hunter3",
-      )
+      expect(
+        options.serverConfig.driver.changeEmailUserPassword,
+      ).toHaveBeenCalledWith("1", "hunter2", "hunter3")
 
       const data = await response.json()
       expect(data).toEqual({ data: { ok: true } })
@@ -75,7 +73,7 @@ test(
   "when authenticated and sending incorrect current password",
   handler(
     () => {
-      options.driver.changeEmailUserPassword = jest.fn(() => {
+      options.serverConfig.driver.changeEmailUserPassword = jest.fn(() => {
         throw new Error("authentication failed")
       })
       return createChangePassword(options)
@@ -93,11 +91,9 @@ test(
 
       expect(response.status).toBe(200)
 
-      expect(options.driver.changeEmailUserPassword).toHaveBeenCalledWith(
-        "1",
-        "hunter2",
-        "hunter3",
-      )
+      expect(
+        options.serverConfig.driver.changeEmailUserPassword,
+      ).toHaveBeenCalledWith("1", "hunter2", "hunter3")
 
       const data = await response.json()
       expect(data).toEqual({ error: { code: "authentication failed" } })

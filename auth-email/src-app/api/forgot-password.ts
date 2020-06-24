@@ -65,7 +65,7 @@ export function createForgotPassword(options: AuthRouteHandlerOptions) {
     }
 
     try {
-      const userId = await options.driver!.getUserIdByEmail(email)
+      const userId = await options.serverConfig.driver.getUserIdByEmail(email)
 
       const forgotPasswordDelay = delay()
 
@@ -79,7 +79,12 @@ export function createForgotPassword(options: AuthRouteHandlerOptions) {
               if (err) return reject(err)
 
               const link = `${options.publicConfig.baseUrl}/reset-password#token=${resetJwt}`
-              resolve(options.triggers.sendForgotPasswordMail(email, link))
+              resolve(
+                options.serverConfig.triggers.sendForgotPasswordMail(
+                  email,
+                  link,
+                ),
+              )
             },
           )
         })

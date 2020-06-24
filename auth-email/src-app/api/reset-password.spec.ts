@@ -143,11 +143,11 @@ test(
         }),
       })
       expect(response.status).toBe(200)
-      expect(options.triggers.fetchAdditionalTokenContent).toHaveBeenCalledWith(
-        {
-          userId: "1",
-        },
-      )
+      expect(
+        options.serverConfig.triggers.fetchAdditionalTokenContent,
+      ).toHaveBeenCalledWith({
+        userId: "1",
+      })
       expect(response.headers.get("Set-Cookie")).toMatch(
         new RegExp(
           `^${options.serverConfig.cookieName}=(\\s|.)+; Path=/; HttpOnly; SameSite=Lax`,

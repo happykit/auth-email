@@ -48,7 +48,7 @@ test(
   "when token verification fails",
   handler(
     () => {
-      options.driver.confirmAccount = jest.fn(async () => false)
+      options.serverConfig.driver.confirmAccount = jest.fn(async () => false)
       return createConfirmAccount(options)
     },
     async (url) => {
@@ -73,7 +73,7 @@ test(
   "when account confirmation fails",
   handler(
     () => {
-      options.driver.confirmAccount = jest.fn(async () => false)
+      options.serverConfig.driver.confirmAccount = jest.fn(async () => false)
       return createConfirmAccount(options)
     },
     async (url) => {
@@ -99,7 +99,7 @@ test(
   "when account confirmation succeeds",
   handler(
     () => {
-      options.driver.confirmAccount = jest.fn(async () => true)
+      options.serverConfig.driver.confirmAccount = jest.fn(async () => true)
       return createConfirmAccount(options)
     },
     async (url) => {

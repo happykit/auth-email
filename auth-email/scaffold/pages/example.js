@@ -43,8 +43,8 @@ const Example = (props) => {
               this page with your own application.
             </p>
             <p className="mt-2">
-              All the authentication pages with{" "}
-              <span className="text-indigo-600">purple</span> buttons are set up
+              All the authentication pages with
+              <span className="text-indigo-600">purple buttons</span> are set up
               for you already. You can keep using them, or replace them with
               your own!
             </p>
