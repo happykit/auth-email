@@ -16,10 +16,10 @@
     "pub": "yarn workspace @happykit/auth-email publish --access=public"
   },
   "dependencies": {
-    "wsrun": "5.2.0"
+    "wsrun": "5.2.1"
   },
   "devDependencies": {
-    "faunadb": "2.14.1",
+    "faunadb": "2.14.2",
     "next": "9.4.4",
     "prettier": "2.0.5",
     "react": "16.13.1",
