@@ -114,9 +114,8 @@ yarn create next-app --example https://github.com/happykit/auth-email/tree/maste
 </details>
 
 > ~Check out our [documentation](https://docs.happykit.dev/) in case you want to add HappyAuth to an existing project. We provide a convenient CLI which adds the required files to your project in one step.~
-> 
-> **Note:** The documentation site is still under construction. In the meantime, you can check out the README at this [commit](https://github.com/happykit/auth-email/blob/740a01395ab517c7e18fbed2751d6fbd5ff12d0c/README.md#setup) for the manual setup instructions. You'll need to install `@happykit/auth-email@1.0.0-alpha.3`.
-
+>
+> **Note:** The documentation site is still under construction. In the meantime, you can check out the README at this [commit](https://github.com/happykit/auth-email/blob/740a01395ab517c7e18fbed2751d6fbd5ff12d0c/README.md#setup) for the manual setup instructions. You'll need to install `@happykit/auth-email@1.0.0-alpha.4`.
 
 ### Create a FaunaDB instance
 
@@ -139,7 +138,6 @@ There's a generous free tier and it doesn't require a credit card. You can sign 
 1. Click "Save"
 
 That completes our database setup for now. We'll later use a script to create a User collection and an index.
-
 
 ### The starter
 
@@ -225,4 +223,3 @@ yarn dev
 ```
 
 Then visit [localhost:3000](http://localhost:3000/) to see HappyAuth in action.
-
