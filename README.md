@@ -17,7 +17,7 @@
 
 ### Key Features
 
-- A `useAuth` hook which gets the current user
+- A `useAuth` hook which returns the current user
 - An optional `getServerSideAuth` for server-side rendering
 - HappyAuth is tiny
   - it adds only 4.6 kB to the first load JS
@@ -27,9 +27,9 @@
   - Special `triggers` allow you to hook into certain events
   - You can even completely replace pages and api routes
 - All user data is stored in your own database
+  - Works with any database by adding a small database-specific driver
   - You can run it on a free FaunaDB instance, which you can then also use for your app data
   - We have a CLI which configures FaunaDB for you
-  - Works with any database by adding a small database-specific driver
 - Full TypeScript support with extensive types
 - OAuth support (authenticate using Facebook, GitHub etc)
 
@@ -77,6 +77,8 @@ export default function Home(props) {
 ```
 
 We are now prechecking the authenticated user on the server and passing that information down to the client. This allows us to get rid off the loading state. And more importantly, this gives us full access to the currently authenticated user inside `getServerSideProps`. We can prefetch any data we like based on that user and return it to as a prop. No more loading spinners!
+
+The `getServerSideAuth` function is fast as it doesn't need to make a database query. It mainly decodes the JSON Web Token which gets passed to the server as a cookie.
 
 > This package itself is mostly ready, however the documentation and the HappyKit website are still being built.
 
@@ -141,7 +143,9 @@ That completes our database setup for now. We'll later use a script to create a 
 
 ### The starter
 
-The most important concept is that you'll usually not import from `@happykit/auth-email`. Instead, you'll import preconfigured functions from a local folder called `happyauth`. The project is configured so that you can just do `import x from "happyauth"` and it will resolve to the `happyauth` folder.
+The most important concept is that you'll usually not import from `@happykit/auth-email`. Instead, you'll import preconfigured functions from a local folder called `happyauth`. Your project is configured so that you can just do `import x from "happyauth"` and it will resolve to the local `happyauth` folder.
+
+We do this to allow you to preconfigure certain functions and to enable Next.js to strip server-side code from the client bundle using its code removal feature.
 
 The following files are included in your Next.js HappyAuth starter.
 
