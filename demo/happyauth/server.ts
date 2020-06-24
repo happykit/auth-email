@@ -9,7 +9,7 @@ import {
   SendForgotPasswordMail,
 } from "@happykit/auth-email/api"
 import createMailgun from "mailgun-js"
-import { faunaClient } from "fauna-client"
+import { faunaClient, q } from "fauna-client"
 
 const mailgun = createMailgun({
   apiKey: process.env.MAILGUN_API_KEY!,
@@ -72,7 +72,58 @@ export const serverConfig: ServerConfig = {
   tokenSecret: process.env.HAPPYAUTH_TOKEN_SECRET!,
   cookieName: "happyauth",
   secure: process.env.NODE_ENV === "production",
-  identityProviders: {},
+  identityProviders: {
+    github: {
+      credentials: {
+        client: {
+          id: process.env.OAUTH_GITHUB_ID!,
+          secret: process.env.OAUTH_GITHUB_SECRET!,
+        },
+        auth: {
+          tokenHost: "https://github.com",
+          tokenPath: "/login/oauth/access_token",
+          authorizePath: "/login/oauth/authorize",
+        },
+      },
+      scope: "notifications",
+      upsertUser: async (token) => {
+        const response = await fetch("https://api.github.com/user", {
+          headers: {
+            Authorization: `token ${token.access_token}`,
+          },
+        })
+        const content = await response.json()
+        const userId = await faunaClient.query<string>(
+          q.Let(
+            {
+              match: q.Match(
+                q.Index("users_by_email"),
+                content.email.toLowerCase(),
+              ),
+            },
+            q.If(
+              q.Exists(q.Var("match")),
+              q.Select(["ref", "id"], q.Get(q.Var("match"))),
+              q.Select(
+                ["ref", "id"],
+                q.Create(q.Collection("User"), {
+                  data: {
+                    email: content.email.toLowerCase(),
+                    created: q.Now(),
+                    accountStatus: "external",
+                  },
+                }),
+              ),
+            ),
+          ),
+        )
+
+        // TODO upsert user attributes
+
+        return userId
+      },
+    },
+  },
   triggers: {
     sendConfirmAccountMail,
     sendForgotPasswordMail,

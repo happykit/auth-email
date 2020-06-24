@@ -17,7 +17,9 @@ export const publicConfig: PublicConfig = {
       return `https://${process.env.VERCEL_URL}`
     return "http://localhost:3000"
   })(),
-  identityProviders: {},
+  identityProviders: {
+    github: { name: "GitHub" },
+  },
   // Possible configuration:
   // redirects: {
   //   afterSignIn: "/?afterSigIn=true",
