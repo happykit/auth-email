@@ -227,6 +227,39 @@ function ResendConfirmationEmailPage(props: { email: string }) {
   )
 }
 
+function AlreadySignedIn(props: { publicConfig: PublicConfig }) {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full">
+        <div>
+          <h2 className="text-center text-3xl leading-9 font-extrabold text-gray-900">
+            Sign in to your account
+          </h2>
+        </div>
+        <div
+          className="mt-6 bg-indigo-100 border-l-4 border-indigo-500 text-indigo-700 p-4"
+          role="alert"
+        >
+          <p className="font-bold">Already signed in</p>
+          <p>You are signed in already.</p>
+        </div>
+        <div className="mt-6">
+          <Link href={props.publicConfig.redirects?.afterSignIn || "/"}>
+            <a>
+              <button
+                type="button"
+                className="flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
+              >
+                Continue
+              </button>
+            </a>
+          </Link>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function LoginPage(props: {
   state: StateMachine.State<LoginContext, LoginEvent, any>
   send: (event: LoginEvent) => void
@@ -412,6 +445,8 @@ export function Login(props: {
       </Head>
       {state.value === "resentConfirmationEmail" ? (
         <ResendConfirmationEmailPage email={state.context.values.email} />
+      ) : props.auth.state === "signedIn" ? (
+        <AlreadySignedIn publicConfig={props.publicConfig} />
       ) : (
         <LoginPage
           state={state}

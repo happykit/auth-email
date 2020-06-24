@@ -137,6 +137,39 @@ async function signUpAction(
   }
 }
 
+function AlreadySignedUp(props: { publicConfig: PublicConfig }) {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full">
+        <div>
+          <h2 className="text-center text-3xl leading-9 font-extrabold text-gray-900">
+            Create a new account
+          </h2>
+        </div>
+        <div
+          className="mt-6 bg-indigo-100 border-l-4 border-indigo-500 text-indigo-700 p-4"
+          role="alert"
+        >
+          <p className="font-bold">Already signed in</p>
+          <p>You are signed in already.</p>
+        </div>
+        <div className="mt-6">
+          <Link href={props.publicConfig.redirects?.afterSignIn || "/"}>
+            <a>
+              <button
+                type="button"
+                className="flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
+              >
+                Continue
+              </button>
+            </a>
+          </Link>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export function Signup(props: {
   auth: Auth<BaseTokenData>
   publicConfig: PublicConfig
@@ -162,123 +195,127 @@ export function Signup(props: {
       <Head>
         <style>{tailwind}</style>
       </Head>
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full">
-          <div>
-            <h2 className="text-center text-3xl leading-9 font-extrabold text-gray-900">
-              Create a new account
-            </h2>
-            <p className="mt-2 text-center text-sm leading-5 text-gray-600">
-              Or{" "}
-              <Link href="/login">
-                <a className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
-                  sign in to your account
-                </a>
-              </Link>
-            </p>
-          </div>
-          {state.value === "created" ? (
-            <SuccessMessage title="Account created">
-              <p className="text-sm">
-                Your account was created. Check your email to verify your
-                account.
+      {props.auth.state === "signedIn" ? (
+        <AlreadySignedUp publicConfig={props.publicConfig} />
+      ) : (
+        <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-md w-full">
+            <div>
+              <h2 className="text-center text-3xl leading-9 font-extrabold text-gray-900">
+                Create a new account
+              </h2>
+              <p className="mt-2 text-center text-sm leading-5 text-gray-600">
+                Or{" "}
+                <Link href="/login">
+                  <a className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
+                    sign in to your account
+                  </a>
+                </Link>
               </p>
-            </SuccessMessage>
-          ) : (
-            <form
-              onSubmit={(event) => {
-                event.preventDefault()
-                send({ type: "SUBMIT" })
-              }}
-              className={classNames(
-                "mt-8",
-                state.value === "submitting" && "opacity-50",
-              )}
-              noValidate
-            >
-              <input type="hidden" name="remember" defaultValue="true" />
-              <InputGroup
-                id="email"
-                label="Email address"
-                type="email"
-                autoComplete="email"
-                disabled={state.value === "submitting"}
-                required
-                touched={state.context.touched.email}
-                error={(() => {
-                  switch (state.context.validationErrors.email) {
-                    case "missing":
-                      return "The email address is missing."
-                    case "invalid":
-                      return "The email address doesn't seem valid."
-                    default:
-                      return null
-                  }
-                })()}
-                value={state.context.values.email}
-                onChange={(event) => {
-                  const email = event.target.value
-                  send({ type: "INPUT", payload: { email } })
+            </div>
+            {state.value === "created" ? (
+              <SuccessMessage title="Account created">
+                <p className="text-sm">
+                  Your account was created. Check your email to verify your
+                  account.
+                </p>
+              </SuccessMessage>
+            ) : (
+              <form
+                onSubmit={(event) => {
+                  event.preventDefault()
+                  send({ type: "SUBMIT" })
                 }}
-                onBlur={() => {
-                  send({ type: "BLUR", payload: { email: true } })
-                }}
-              />
-
-              <InputGroup
-                id="password"
-                label="Password"
-                type="password"
-                autoComplete="new-password"
-                disabled={state.value === "submitting"}
-                required
-                touched={state.context.touched.password}
-                error={(() => {
-                  switch (state.context.validationErrors.password) {
-                    case "missing":
-                      return "The password is missing."
-                    case "too-short":
-                      return "The password should at least be three characters long."
-                    default:
-                      return null
-                  }
-                })()}
-                value={state.context.values.password}
-                onChange={(event) => {
-                  const password = event.target.value
-                  send({ type: "INPUT", payload: { password } })
-                }}
-                onBlur={() => {
-                  send({ type: "BLUR", payload: { password: true } })
-                }}
-              />
-              {state.context.error && (
-                <ErrorMessage title="Unexpected error">
-                  <p>
-                    {state.context.error.message || state.context.error.code}
-                  </p>
-                </ErrorMessage>
-              )}
-              <div className="mt-6">
-                <button
-                  type="submit"
+                className={classNames(
+                  "mt-8",
+                  state.value === "submitting" && "opacity-50",
+                )}
+                noValidate
+              >
+                <input type="hidden" name="remember" defaultValue="true" />
+                <InputGroup
+                  id="email"
+                  label="Email address"
+                  type="email"
+                  autoComplete="email"
                   disabled={state.value === "submitting"}
-                  className={classNames(
-                    "w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out",
-                  )}
-                >
-                  Sign up
-                </button>
-              </div>
-              {hasConfiguredIdentityProviders && (
-                <SocialLogins
-                  identityProviders={props.publicConfig.identityProviders}
+                  required
+                  touched={state.context.touched.email}
+                  error={(() => {
+                    switch (state.context.validationErrors.email) {
+                      case "missing":
+                        return "The email address is missing."
+                      case "invalid":
+                        return "The email address doesn't seem valid."
+                      default:
+                        return null
+                    }
+                  })()}
+                  value={state.context.values.email}
+                  onChange={(event) => {
+                    const email = event.target.value
+                    send({ type: "INPUT", payload: { email } })
+                  }}
+                  onBlur={() => {
+                    send({ type: "BLUR", payload: { email: true } })
+                  }}
                 />
-              )}
-            </form>
-          )}
+
+                <InputGroup
+                  id="password"
+                  label="Password"
+                  type="password"
+                  autoComplete="new-password"
+                  disabled={state.value === "submitting"}
+                  required
+                  touched={state.context.touched.password}
+                  error={(() => {
+                    switch (state.context.validationErrors.password) {
+                      case "missing":
+                        return "The password is missing."
+                      case "too-short":
+                        return "The password should at least be three characters long."
+                      default:
+                        return null
+                    }
+                  })()}
+                  value={state.context.values.password}
+                  onChange={(event) => {
+                    const password = event.target.value
+                    send({ type: "INPUT", payload: { password } })
+                  }}
+                  onBlur={() => {
+                    send({ type: "BLUR", payload: { password: true } })
+                  }}
+                />
+                {state.context.error && (
+                  <ErrorMessage title="Unexpected error">
+                    <p>
+                      {state.context.error.message || state.context.error.code}
+                    </p>
+                  </ErrorMessage>
+                )}
+                <div className="mt-6">
+                  <button
+                    type="submit"
+                    disabled={state.value === "submitting"}
+                    className={classNames(
+                      "w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out",
+                    )}
+                  >
+                    Sign up
+                  </button>
+                </div>
+                {hasConfiguredIdentityProviders && (
+                  <SocialLogins
+                    identityProviders={props.publicConfig.identityProviders}
+                  />
+                )}
+              </form>
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </React.Fragment>
   )
 }
