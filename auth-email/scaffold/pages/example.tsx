@@ -39,12 +39,14 @@ const Example = (props: { initialAuth: AuthState }) => {
           </div>
           <div className="mt-8 text-sm text-gray-700">
             <p className="mt-2">
-              This pink page was created automatically, so you can explore
-              HappyAuth. You would replace this page with your own application.
+              This application was created HappyAuth. You would replace this
+              index page with your own application.
             </p>
             <p className="mt-2">
-              All the purple authentication components are set up for you
-              already. You can keep using them, or replace them with your own!
+              All the authentication pages with{" "}
+              <span className="text-indigo-600">purple</span> buttons are set up
+              for you already. You can keep using them, or replace them with
+              your own!
             </p>
           </div>
           {auth.state === "signedIn" ? (

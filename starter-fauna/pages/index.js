@@ -43,8 +43,10 @@ const Index = (props) => {
               HappyAuth. You would replace this page with your own application.
             </p>
             <p className="mt-2">
-              All the purple authentication components are set up for you
-              already. You can keep using them, or replace them with your own!
+              All the authentication pages with{" "}
+              <span className="text-indigo-600">purple</span> buttons are set up
+              for you already. You can keep using them, or replace them with
+              your own!
             </p>
           </div>
           {auth.state === "signedIn" ? (
