@@ -178,6 +178,8 @@ This file contains the server configuration. That configuration is not accessibl
 
 When you use `import { getServerSideAuth } from "happyauth/server"`, the import resolves to this file.
 
+This file and `happyauth/index.js` are the two places where you usually configure HappyAuth.
+
 #### `pages/*.js`
 
 These pages handle user authentication. They define the following routes:
@@ -192,8 +194,6 @@ These pages handle user authentication. They define the following routes:
 #### `pages/api/[...params].js`
 
 This file defines a [Catch all API route](https://nextjs.org/docs/api-routes/dynamic-api-routes#catch-all-api-routes) which handles all requests to `/api/auth/*`.
-
-This file, `happyauth/index.js` and `happyauth/server.js` are the three places where you can configure HappyAuth.
 
 <details>
 <summary>Less important files</summary>
