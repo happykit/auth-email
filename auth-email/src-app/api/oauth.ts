@@ -154,7 +154,11 @@ export function createOAuth(options: AuthRouteHandlerOptions) {
           clearOAuthStateCookie,
           ...serializedCookie,
         ])
-        res.setHeader("Location", options.publicConfig.baseUrl)
+        res.setHeader(
+          "Location",
+          options.publicConfig.baseUrl +
+            (options.publicConfig.redirects?.afterSignIn || "/"),
+        )
         res.statusMessage = "Found"
         res.status(302).end()
         return
