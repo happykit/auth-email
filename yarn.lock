@@ -1195,6 +1195,40 @@
     "@hapi/bourne" "1.x.x"
     "@hapi/hoek" "8.x.x"
 
+"@happykit/auth-email@1.0.0-alpha.4":
+  version "1.0.0-alpha.4"
+  resolved "https://registry.yarnpkg.com/@happykit/auth-email/-/auth-email-1.0.0-alpha.4.tgz#cc4e62fe3c9c7edeeda8040f12612eaf65a6ffd6"
+  integrity sha512-LDLBXkmmdV0Gi15gzKpHOSPMtir8fKwNoCY3KFIDEtxNadB75ILb8pvGaEdVCIYoKF1573/2ZjqOsU0u1UNvXQ==
+  dependencies:
+    "@types/classnames" "2.2.10"
+    "@types/cookie" "0.4.0"
+    "@types/find-root" "1.1.1"
+    "@types/fs-extra" "9.0.1"
+    "@types/inquirer" "6.5.0"
+    "@types/jsonwebtoken" "8.5.0"
+    "@types/klaw" "3.0.1"
+    "@types/lodash.mapvalues" "4.6.6"
+    "@types/ms" "0.7.31"
+    "@types/simple-oauth2" "2.5.3"
+    "@xstate/fsm" "1.4.0"
+    "@xstate/react" "0.8.1"
+    chalk "4.1.0"
+    classnames "2.2.6"
+    commander "5.1.0"
+    cookie "0.4.1"
+    find-root "1.1.0"
+    fs-extra "9.0.1"
+    inquirer "7.2.0"
+    jsonwebtoken "8.5.1"
+    klaw "3.0.0"
+    lodash.mapvalues "4.6.0"
+    ms "2.1.2"
+    open "7.0.4"
+    path "0.12.7"
+    query-string "6.13.1"
+    simple-oauth2 "3.4.0"
+    xstate "4.10.0"
+
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@istanbuljs/load-nyc-config/-/load-nyc-config-1.1.0.tgz#fd3db1d59ecf7cf121e80650bb86712f9b55eced"
@@ -9823,9 +9857,9 @@ xtend@^4.0.0, xtend@^4.0.2, xtend@~4.0.1:
   integrity sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==
 
 y18n@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/y18n/-/y18n-4.0.0.tgz#95ef94f85ecc81d007c264e190a120f0a3c8566b"
-  integrity sha512-r9S/ZyXu/Xu9q1tYlpsLIsa3EeLXXk0VwlxqTcFRfg9EhMW+17kbt9G0NrgCmhGb5vT2hyhJZLfDGx+7+5Uj/w==
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/y18n/-/y18n-4.0.1.tgz#8db2b83c31c5d75099bb890b23f3094891e247d4"
+  integrity sha512-wNcy4NvjMYL8gogWWYAO7ZFWFfHcbdbE57tZO8e4cbpj8tfUcwrwqSl3ad8HxpYWCdXcJUCeKKZS62Av1affwQ==
 
 yallist@^3.0.2:
   version "3.1.1"
