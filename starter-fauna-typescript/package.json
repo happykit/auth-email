@@ -12,7 +12,7 @@
     "@types/node": "14.0.14",
     "@types/react": "16.9.41",
     "faunadb": "2.14.2",
-    "next": "9.4.4",
+    "next": "11.1.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "typescript": "3.9.5"
