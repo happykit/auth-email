@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "faunadb": "2.14.2",
-    "next": "9.4.4",
+    "next": "11.1.3",
     "prettier": "2.0.5",
     "react": "16.13.1",
     "react-dom": "16.13.1"
