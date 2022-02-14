@@ -1,4 +1,6 @@
-> ⚠️ This is an alpha version and not yet production ready!
+> ⚠ This was an experiment in Next.js authentication.
+>
+> It has since been deprecated. We recommend using [NextAuth.js](https://next-auth.js.org/) instead.
 
 <a id="nav">
   <img src="https://i.imgur.com/fxD3HmM.png" width="100%" />
@@ -81,10 +83,6 @@ We are now prechecking the authenticated user on the server and passing that inf
 The `getServerSideAuth` function is fast as it doesn't need to make a database query. It mainly decodes the JSON Web Token which gets passed to the server as a cookie.
 
 > This package itself is mostly ready, however the documentation and the HappyKit website are still being built.
-
-## Demo
-
-_gif coming soon_
 
 ## Quickstart
 
